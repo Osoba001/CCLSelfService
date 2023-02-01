@@ -59,6 +59,10 @@ namespace Cyphercrescent.SelfService.BuildBackgroundService
                 stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.None);
                 isComplete = true;
             }
+            catch
+            {
+
+            }
             finally
             {
                 stream?.Close();

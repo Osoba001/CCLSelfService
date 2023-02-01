@@ -25,4 +25,8 @@
     <Folder Include="Fixtures\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Cyphercrescent.SelfService.BuildBackgroundService\Cyphercrescent.SelfService.BuildBackgroundService.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,6 @@
 ﻿
+using Cyphercrescent.BuildService.Test.Helpers;
+using Cyphercrescent.SelfService.BuildBackgroundService;
 using FluentAssertions;
 using System;
 using System.Collections.Generic;
@@ -12,13 +14,23 @@ namespace Cyphercrescent.BuildService.Test.System
 {
     public class DownloadText
     {
+        string sourePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}CClBgSelfService{Path.DirectorySeparatorChar}Source";
+        string destinationPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}CClBgSelfService{Path.DirectorySeparatorChar}Destination";
         [Fact]
-        private void HasDownloadCompleted_ReturnFalse()
+        private void HasDownloadCompleted_ReturnFalseIfNotCompleted_TrueWhenCompleted()
         {
-            var path = Environment.CurrentDirectory + "/Fixture";
-            //var res= Directory.Exists(path);
 
-            path.Should().Be("/Fixture");
+            FileManagerHelper.CreateFileInDir(sourePath, "MyTestFile.zip");
+            string filePath = Path.Join(sourePath, "MyTestFile.zip");
+            FileStream stream= FileManagerHelper.OpenAfile(filePath);
+            DownloadFolderSelfService SelfService=new DownloadFolderSelfService();
+            var res=SelfService.HasDownloadCompleted(filePath);
+            res.Should().Be(false);
+            FileManagerHelper.Closefile(stream);
+            var res2 = SelfService.HasDownloadCompleted(filePath);
+            res2.Should().Be(true);
         }
+
+
     }
 }
