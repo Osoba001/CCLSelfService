@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DELL\\Desktop\\Apps\\CCLSelfService\\Cyphercrescent.BuildService.Test\\Cyphercrescent.BuildService.Test.csproj": {}
+    "C:\\Users\\kelly.osoba\\Desktop\\APPs\\CCLSelfService\\Cyphercrescent.BuildService.Test\\Cyphercrescent.BuildService.Test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DELL\\Desktop\\Apps\\CCLSelfService\\Cyphercrescent.BuildService.Test\\Cyphercrescent.BuildService.Test.csproj": {
+    "C:\\Users\\kelly.osoba\\Desktop\\APPs\\CCLSelfService\\Cyphercrescent.BuildService.Test\\Cyphercrescent.BuildService.Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DELL\\Desktop\\Apps\\CCLSelfService\\Cyphercrescent.BuildService.Test\\Cyphercrescent.BuildService.Test.csproj",
+        "projectUniqueName": "C:\\Users\\kelly.osoba\\Desktop\\APPs\\CCLSelfService\\Cyphercrescent.BuildService.Test\\Cyphercrescent.BuildService.Test.csproj",
         "projectName": "Cyphercrescent.BuildService.Test",
-        "projectPath": "C:\\Users\\DELL\\Desktop\\Apps\\CCLSelfService\\Cyphercrescent.BuildService.Test\\Cyphercrescent.BuildService.Test.csproj",
-        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DELL\\Desktop\\Apps\\CCLSelfService\\Cyphercrescent.BuildService.Test\\obj\\",
+        "projectPath": "C:\\Users\\kelly.osoba\\Desktop\\APPs\\CCLSelfService\\Cyphercrescent.BuildService.Test\\Cyphercrescent.BuildService.Test.csproj",
+        "packagesPath": "C:\\Users\\kelly.osoba\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kelly.osoba\\Desktop\\APPs\\CCLSelfService\\Cyphercrescent.BuildService.Test\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kelly.osoba\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\DELL\\Desktop\\Apps\\CCLSelfService\\Cyphercrescent.SelfService.BuildBackgroundService\\Cyphercrescent.SelfService.BuildBackgroundService.csproj": {
-                "projectPath": "C:\\Users\\DELL\\Desktop\\Apps\\CCLSelfService\\Cyphercrescent.SelfService.BuildBackgroundService\\Cyphercrescent.SelfService.BuildBackgroundService.csproj"
+              "C:\\Users\\kelly.osoba\\Desktop\\APPs\\CCLSelfService\\Cyphercrescent.SelfService.BuildBackgroundService\\Cyphercrescent.SelfService.BuildBackgroundService.csproj": {
+                "projectPath": "C:\\Users\\kelly.osoba\\Desktop\\APPs\\CCLSelfService\\Cyphercrescent.SelfService.BuildBackgroundService\\Cyphercrescent.SelfService.BuildBackgroundService.csproj"
               }
             }
           }
@@ -75,8 +75,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -85,21 +84,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\DELL\\Desktop\\Apps\\CCLSelfService\\Cyphercrescent.SelfService.BuildBackgroundService\\Cyphercrescent.SelfService.BuildBackgroundService.csproj": {
+    "C:\\Users\\kelly.osoba\\Desktop\\APPs\\CCLSelfService\\Cyphercrescent.SelfService.BuildBackgroundService\\Cyphercrescent.SelfService.BuildBackgroundService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DELL\\Desktop\\Apps\\CCLSelfService\\Cyphercrescent.SelfService.BuildBackgroundService\\Cyphercrescent.SelfService.BuildBackgroundService.csproj",
+        "projectUniqueName": "C:\\Users\\kelly.osoba\\Desktop\\APPs\\CCLSelfService\\Cyphercrescent.SelfService.BuildBackgroundService\\Cyphercrescent.SelfService.BuildBackgroundService.csproj",
         "projectName": "Cyphercrescent.SelfService.BuildBackgroundService",
-        "projectPath": "C:\\Users\\DELL\\Desktop\\Apps\\CCLSelfService\\Cyphercrescent.SelfService.BuildBackgroundService\\Cyphercrescent.SelfService.BuildBackgroundService.csproj",
-        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DELL\\Desktop\\Apps\\CCLSelfService\\Cyphercrescent.SelfService.BuildBackgroundService\\obj\\",
+        "projectPath": "C:\\Users\\kelly.osoba\\Desktop\\APPs\\CCLSelfService\\Cyphercrescent.SelfService.BuildBackgroundService\\Cyphercrescent.SelfService.BuildBackgroundService.csproj",
+        "packagesPath": "C:\\Users\\kelly.osoba\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kelly.osoba\\Desktop\\APPs\\CCLSelfService\\Cyphercrescent.SelfService.BuildBackgroundService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kelly.osoba\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -136,8 +135,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -146,7 +144,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

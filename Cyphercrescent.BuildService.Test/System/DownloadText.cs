@@ -14,14 +14,16 @@ namespace Cyphercrescent.BuildService.Test.System
 {
     public class DownloadText
     {
-        string sourePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}CClBgSelfService{Path.DirectorySeparatorChar}Source";
-        string destinationPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}CClBgSelfService{Path.DirectorySeparatorChar}Destination";
+        static string sourePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}CClBgSelfService{Path.DirectorySeparatorChar}Source";
+        static string destinationPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}CClBgSelfService{Path.DirectorySeparatorChar}Destination";
+        static string ZipFileName = "WPF_BackgroundServices_App-master";
+        string fileFullNameInSource=Path.Join(sourePath, ZipFileName + ".zip");
+        string fileFullNameInDest=Path.Join(destinationPath, ZipFileName + ".zip");
         [Fact]
         private void HasDownloadCompleted_ReturnFalseIfNotCompleted_TrueWhenCompleted()
         {
-
-            FileManagerHelper.CreateFileInDir(sourePath, "MyTestFile.zip");
-            string filePath = Path.Join(sourePath, "MyTestFile.zip");
+            //FileManagerHelper.CreateFileInDir(sourePath, ZipFileName);
+            string filePath = Path.Join(sourePath, ZipFileName + ".zip");
             FileStream stream= FileManagerHelper.OpenAfile(filePath);
             DownloadFolderSelfService SelfService=new DownloadFolderSelfService();
             var res=SelfService.HasDownloadCompleted(filePath);
@@ -31,6 +33,27 @@ namespace Cyphercrescent.BuildService.Test.System
             res2.Should().Be(true);
         }
 
+        [Fact]
+        private void CopyFile_ReturnSoccess_IfFileAtSourceEqual_DestFile()
+        {
+            FileManager fileManager = new FileManager(ZipFileName, sourePath, destinationPath);
+            var file = new FileInfo(fileFullNameInSource);
+            fileManager.CopyFileToDestination();
+            var expectedFile=new FileInfo(fileFullNameInDest);
+            file.Length.Should().Be(expectedFile.Length);
+            file.Name.Should().Be(expectedFile.Name);
+        }
 
+        [Fact]
+        private void UnZipFile_SuccessIfContainExeFile()
+        {
+            FileManager fileManager = new FileManager(ZipFileName, sourePath, destinationPath);
+            fileManager.UnzipFile();
+            var dir=new DirectoryInfo(Path.Join(destinationPath,ZipFileName));
+            var exeFile= dir.GetFiles("*.exe").FirstOrDefault();
+            exeFile.Should().NotBeNull();
+            exeFile.Exists.Should().BeTrue();
+            
+        }
     }
 }

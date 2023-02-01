@@ -12,12 +12,13 @@ namespace Cyphercrescent.SelfService.BuildBackgroundService
     {
         private readonly string _zipFileName;
         private readonly string _destinationPath;
-        public static string DownloadsFolderPath => $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}Downloads";
+        private readonly string DownloadsFolderPath; 
        
-        public FileManager(string zipFileName, string destinationDirectory)
+        public FileManager(string zipFileName,string sourceDirectory, string destinationDirectory)
         {
             _zipFileName = zipFileName;
             _destinationPath = destinationDirectory;
+            DownloadsFolderPath = sourceDirectory;
         }
         public void CopyUnzipAndLaunch()
         {
@@ -33,15 +34,15 @@ namespace Cyphercrescent.SelfService.BuildBackgroundService
             }
         }
 
-        private void CopyFileToDestination()
+        public void CopyFileToDestination()
         {
             CreateDiretoryIfNotExist();
             File.Copy(Path.Join(DownloadsFolderPath, $"{_zipFileName}.zip"), Path.Join(_destinationPath, $"{_zipFileName}.zip"), true);
         }
 
-        private void UnzipFile()
+        public void UnzipFile()
         {
-            ZipFile.ExtractToDirectory(Path.Join(_destinationPath, $"{_zipFileName}.zip"), _destinationPath);
+            ZipFile.ExtractToDirectory(Path.Join(_destinationPath, $"{_zipFileName}.zip"), _destinationPath,true);
         }
 
         private void Launch_exeFile()

@@ -37,8 +37,9 @@ namespace Cyphercrescent.BuildService.Test.Helpers
         {
             var file = new FileInfo(FullPath);
             FileStream stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.None);
-            //stream.Dispose();
         }
+
+
         public static void Closefile(FileStream stream)
         {
             stream.Close();

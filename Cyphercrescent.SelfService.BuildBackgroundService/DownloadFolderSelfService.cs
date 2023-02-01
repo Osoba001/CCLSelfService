@@ -32,7 +32,7 @@ namespace Cyphercrescent.SelfService.BuildBackgroundService
                 {
                     if (file.Name==$"{ZipFileName}.zip")
                     {
-                        var fileManger = new FileManager(ZipFileName, Destination);
+                        var fileManger = new FileManager(ZipFileName,SourceFolder, Destination);
                         fileManger.CopyUnzipAndLaunch();
                     }
                     n = MAX_NO_TRIALS;
