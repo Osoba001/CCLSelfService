@@ -1,8 +1,15 @@
 ﻿using Cyphercrescent.SelfService.BuildBackgroundService;
 using Topshelf;
-
+/// <summary>
+/// This is the entering point of the application.
+/// Every methods in this class runs at start up.
+/// </summary>
 class Program
 {
+    /// <summary>
+    /// This method uses Topshelf to start and stop the windows background service
+    /// by calling the StartWatching and Stop methods in the DownloadFolderSelfService class.
+    /// </summary>
     static void Main()
     {
         var exitCode = HostFactory.Run(x =>
@@ -15,8 +22,8 @@ class Program
             });
             x.RunAsLocalSystem();
 
-            x.SetServiceName("SEPAL-Service");
-            x.SetDisplayName("SEPAL Self-Service");
+            x.SetServiceName("SEPAL-Builds-Service");
+            x.SetDisplayName("CypherCrescent Builds SelfService");
             x.SetDescription("A Service that create a new build and launch the .exe file SEPAL for every new download");
         });
 
