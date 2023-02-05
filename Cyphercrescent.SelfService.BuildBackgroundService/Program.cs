@@ -22,9 +22,9 @@ class Program
             });
             x.RunAsLocalSystem();
 
-            x.SetServiceName("SEPAL-Builds-Service");
-            x.SetDisplayName("CypherCrescent Builds SelfService");
-            x.SetDescription("A Service that create a new build and launch the .exe file SEPAL for every new download");
+            x.SetServiceName("CypherCrescent-Build-Service");
+            x.SetDisplayName("CypherCrescent Build Service");
+            x.SetDescription("A Service that create a new build and launch the .exe file for every new download");
         });
 
         int exitCodeValue = (int)Convert.ChangeType(exitCode, exitCode.GetTypeCode());
