@@ -43,8 +43,8 @@ namespace Cyphercrescent.SelfService.BuildBackgroundService
                 int n = 0;
                 while (n < MAX_NO_TRIALS)
                 {
-                    
-                    if (File.Exists(file.FullName))
+                    bool isComp = File.Exists(file.FullName);
+                    if (isComp)
                     {
                         var fileManger = new FileManager(ZipFileName, SourceFolder, Destination);
                         fileManger.CopyUnzipAndLaunch();

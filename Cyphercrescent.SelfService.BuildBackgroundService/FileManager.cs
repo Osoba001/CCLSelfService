@@ -58,6 +58,7 @@ namespace Cyphercrescent.SelfService.BuildBackgroundService
         /// </summary>
         public void CopyFileToDestination()
         {
+            File.SetCreationTime(Path.Join(DownloadsFolderPath, $"{_zipFileName}.zip"), DateTime.Now.AddSeconds(-1));
             CreateDiretoryIfNotExist();
             File.Copy(Path.Join(DownloadsFolderPath, $"{_zipFileName}.zip"), Path.Join(_destinationPath, $"{_zipFileName}.zip"), true);
             File.SetCreationTime(Path.Join(_destinationPath, $"{_zipFileName}.zip"), DateTime.Now);

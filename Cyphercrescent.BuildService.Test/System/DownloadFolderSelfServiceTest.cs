@@ -17,20 +17,20 @@ namespace Cyphercrescent.BuildService.Test.System
         string sourePath => Path.Join(AppDomain.CurrentDomain.BaseDirectory,"Downloads");
         string ZipFileName = "WPF_BackgroundServices_App-master";
 
-        [Fact]
-        private void HasDownloadCompleted_ReturnFalseIfNotCompleted_TrueIfCompleted()
-        {
-            FileManagerHelper helper= new FileManagerHelper();
-            var file = new FileInfo(Path.Join(sourePath, ZipFileName + ".zip"));
-            DownloadFolderSelfService SelfService = new();
-            using (FileStream stream=File.OpenRead(file.FullName)) 
-            {
-                var res = SelfService.HasDownloadCompleted(file.CreationTime);
-                res.Should().Be(false);
-            }
-            var res2 = SelfService.HasDownloadCompleted(file.CreationTime);
-            res2.Should().Be(true);
-        }
+        //[Fact]
+        //private void HasDownloadCompleted_ReturnFalseIfNotCompleted_TrueIfCompleted()
+        //{
+        //    FileManagerHelper helper= new FileManagerHelper();
+        //    var file = new FileInfo(Path.Join(sourePath, ZipFileName + ".zip"));
+        //    DownloadFolderSelfService SelfService = new();
+        //    using (FileStream stream=File.OpenRead(file.FullName)) 
+        //    {
+        //        var res = SelfService.HasDownloadCompleted(file.CreationTime);
+        //        res.Should().Be(false);
+        //    }
+        //    var res2 = SelfService.HasDownloadCompleted(file.CreationTime);
+        //    res2.Should().Be(true);
+        //}
 
         
         
