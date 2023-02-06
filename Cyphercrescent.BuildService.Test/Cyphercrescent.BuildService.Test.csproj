@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="Fixtures\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
 
   <ItemGroup>

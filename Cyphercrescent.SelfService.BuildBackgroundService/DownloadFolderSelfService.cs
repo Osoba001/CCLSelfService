@@ -8,14 +8,12 @@ namespace Cyphercrescent.SelfService.BuildBackgroundService
 {
     /// <summary>
     /// This class has the FileSystemWatcher that is watching the Downloads folder.
-    /// It has the StartWatching method, Stop and 
-    /// a method that is checking if the downloading file has completed
+    /// It has the StartWatching method and Stop a method.
     /// </summary>
     public class DownloadFolderSelfService
     {
         readonly string Destination = "C:/ProgramData/CypherCrescent/builds";
         private readonly string ZipFileName = "WPF_BackgroundServices_App-master";
-        private const int MAX_NO_TRIALS = 10;
         private FileInfo file=null; 
         private string SourceFolder => $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}{Path.DirectorySeparatorChar}Downloads";
         FileSystemWatcher watcher=null;
@@ -62,19 +60,5 @@ namespace Cyphercrescent.SelfService.BuildBackgroundService
             watcher.Dispose();
         }
 
-        /// <summary>
-        /// This method is called before 
-        /// </summary>
-        /// <param name="fileFullPath">The temp file path of the downloading zip file</param>
-        /// <returns>True if the download has completed</returns>
-        public bool HasDownloadCompleted(string filePath)
-        {
-            if (File.Exists(filePath))
-            {
-                return false;
-            }
-            else
-                return true;
-        }
     }
 }
