@@ -40,19 +40,17 @@ namespace Cyphercrescent.SelfService.BuildBackgroundService
             file= new FileInfo(e.FullPath);
             if (file.Extension==".tmp")
             {
-                int n = 0;
-                while (n < MAX_NO_TRIALS)
+                bool isComp=false;
+                while (!isComp)
                 {
-                    bool isComp = new FileInfo(file.FullName).Exists;
-                    if (!isComp)
+                    isComp = new FileInfo(file.FullName).Exists;
+                    if (isComp)
                     {
-                        var fileManger = new FileManager(ZipFileName, SourceFolder, Destination);
-                        fileManger.CopyUnzipAndLaunch();
-                        n = MAX_NO_TRIALS;
+                        await Task.Delay(10000);
                     }
-                    await Task.Delay(n * 10000);
-
                 }
+                var fileManger = new FileManager(ZipFileName, SourceFolder, Destination);
+                fileManger.CopyUnzipAndLaunch();
             }
             
         }
