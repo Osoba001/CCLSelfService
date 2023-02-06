@@ -43,15 +43,14 @@ namespace Cyphercrescent.SelfService.BuildBackgroundService
                 int n = 0;
                 while (n < MAX_NO_TRIALS)
                 {
-                    bool isComp = File.Exists(file.FullName);
-                    if (isComp)
+                    bool isComp = new FileInfo(file.FullName).Exists;
+                    if (!isComp)
                     {
                         var fileManger = new FileManager(ZipFileName, SourceFolder, Destination);
                         fileManger.CopyUnzipAndLaunch();
                         n = MAX_NO_TRIALS;
                     }
-                    else
-                        await Task.Delay(n * 10000);
+                    await Task.Delay(n * 10000);
 
                 }
             }
