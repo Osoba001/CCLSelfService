@@ -17,13 +17,16 @@ namespace Cyphercrescent.SelfService.BuildBackgroundService
     {
         private readonly string _zipFileName;
         private readonly string _destinationPath;
-        private readonly string DownloadsFolderPath; 
-       /// <summary>
-       /// 
-       /// </summary>
-       /// <param name="zipFileName"> The target file name without extenion</param>
-       /// <param name="sourcePath">The source full path (Downloads folder full path) </param>
-       /// <param name="destinationPath">The full path of where the downloaded file should copy to</param>
+        private readonly string DownloadsFolderPath;
+        public FileInfo? TargetZipFile => GetTargetZipFile();
+        public DateTime? LastTimeCopied => GetFileCreationTime(_destinationPath);
+        public DateTime? LastDownloadedTime => GetFileCreationTime(DownloadsFolderPath);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="zipFileName"> The target file name without extenion</param>
+        /// <param name="sourcePath">The source full path (Downloads folder full path) </param>
+        /// <param name="destinationPath">The full path of where the downloaded file should copy to</param>
         public FileManager(string zipFileName,string sourcePath, string destinationPath)
         {
             _zipFileName = zipFileName;
@@ -32,11 +35,18 @@ namespace Cyphercrescent.SelfService.BuildBackgroundService
         }
         public void CopyUnzipAndLaunch()
         {
-            CopyFileToDestination();
-            UnzipFile();
-            Launch_exeFile();
+            if (Directory.Exists(DownloadsFolderPath) && LastDownloadedTime != null)
+            {
+                if (LastTimeCopied == null || LastTimeCopied < LastDownloadedTime)
+                {
+                    CopyFileToDestination();
+                    UnzipFile();
+                    Launch_exeFile();
+                }
+            }
+            
         }
-        public void CreateDiretoryIfNotExist()
+        private void CreateDiretoryIfNotExist()
         {
             if (!Directory.Exists(_destinationPath))
             {
@@ -50,29 +60,32 @@ namespace Cyphercrescent.SelfService.BuildBackgroundService
         {
             CreateDiretoryIfNotExist();
             File.Copy(Path.Join(DownloadsFolderPath, $"{_zipFileName}.zip"), Path.Join(_destinationPath, $"{_zipFileName}.zip"), true);
+            File.SetCreationTime(Path.Join(_destinationPath, $"{_zipFileName}.zip"), DateTime.Now);
         }
         /// <summary>
         /// Unzip the copied file in the destination folder.
         /// </summary>
         public void UnzipFile()
         {
-            try
-            {
-                ZipFile.ExtractToDirectory(Path.Join(_destinationPath, $"{_zipFileName}.zip"), _destinationPath, true);
-            }
-            catch 
-            {
-
-            }
+            ZipFile.ExtractToDirectory(Path.Join(_destinationPath, $"{_zipFileName}.zip"), _destinationPath, true);
         }
         private void Launch_exeFile()
         {
-            var destinationDir = new DirectoryInfo($"{_destinationPath}{Path.DirectorySeparatorChar}");
-            var exeFile = destinationDir
-                .GetFiles("*.exe", SearchOption.TopDirectoryOnly)
-                .FirstOrDefault();
+            var finalPath = Path.Join(_destinationPath,_zipFileName);
+            var exeFile = new DirectoryInfo(finalPath).GetFiles("*.exe").FirstOrDefault();
             if (exeFile != null) 
-                Process.Start(exeFile!.FullName);
+                Process.Start(exeFile.FullName);
+        }
+        private DateTime? GetFileCreationTime(string directoryPath)
+        {
+            var file = new FileInfo(Path.Join(directoryPath, $"{_zipFileName}.zip"));
+            return file?.CreationTime;
+          
+
+        }
+        private FileInfo? GetTargetZipFile()
+        {
+         return new FileInfo(Path.Join(DownloadsFolderPath, $"{_zipFileName}.zip")); ;
         }
     }
 

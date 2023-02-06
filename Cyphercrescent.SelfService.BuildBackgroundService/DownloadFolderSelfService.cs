@@ -28,30 +28,34 @@ namespace Cyphercrescent.SelfService.BuildBackgroundService
         /// </summary>
         public void StartWatching()
         {
-            watcher = new FileSystemWatcher();
-            watcher.Path = SourceFolder;
-            watcher.EnableRaisingEvents = true;
+            watcher = new FileSystemWatcher
+            {
+                Path = SourceFolder,
+                EnableRaisingEvents = true
+            };
             watcher.Created+= CreateHandler;
         }
-       
-        private void CreateHandler(object sender, FileSystemEventArgs e)
+        private async void CreateHandler(object sender, FileSystemEventArgs e)
         {
-            int n = 0;
-            while (n < MAX_NO_TRIALS)
+            file= new FileInfo(e.FullPath);
+            if (file.Extension==".tmp")
             {
-                n++;
-                if (HasDownloadCompleted(e.FullPath))
+                int n = 0;
+                while (n < MAX_NO_TRIALS)
                 {
-                    if (file.Name==$"{ZipFileName}.zip")
+                    
+                    if (File.Exists(file.FullName))
                     {
-                        var fileManger = new FileManager(ZipFileName,SourceFolder, Destination);
+                        var fileManger = new FileManager(ZipFileName, SourceFolder, Destination);
                         fileManger.CopyUnzipAndLaunch();
+                        n = MAX_NO_TRIALS;
                     }
-                    n = MAX_NO_TRIALS;
-                }else
-                    Task.Delay(n*10000);
-                
+                    else
+                        await Task.Delay(n * 10000);
+
+                }
             }
+            
         }
         /// <summary>
         /// This method  stops the file watcher and dispose it.
@@ -64,30 +68,16 @@ namespace Cyphercrescent.SelfService.BuildBackgroundService
         /// <summary>
         /// This method is called before 
         /// </summary>
-        /// <param name="fileFullPath">The downloading file full path.</param>
+        /// <param name="fileFullPath">The temp file path of the downloading zip file</param>
         /// <returns>True if the download has completed</returns>
-        public bool HasDownloadCompleted(string fileFullPath)
+        public bool HasDownloadCompleted(string filePath)
         {
-            file = new FileInfo(fileFullPath);
-            if (file.Extension=="")
+            if (File.Exists(filePath))
+            {
+                return false;
+            }
+            else
                 return true;
-            bool isComplete = false;
-            FileStream stream=null;
-            try
-            {
-                stream = file.Open(FileMode.Open, FileAccess.Read, FileShare.None);
-                isComplete = true;
-            }
-            catch
-            {
-            
-            }
-            finally
-            {
-                stream?.Close();
-                stream?.Dispose();
-            }
-            return isComplete;
         }
     }
 }
